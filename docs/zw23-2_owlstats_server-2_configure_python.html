@@ -10,9 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Zhengjia Wang" />
 
+<meta name="date" content="2019-10-14" />
 
-<title>Zhengjia</title>
+<title>Use Python on the Server</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -292,33 +294,119 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Zhengjia</h1>
+<h1 class="title toc-ignore">Use Python on the Server</h1>
+<h4 class="author">Zhengjia Wang</h4>
+<h4 class="date">10/14/2019</h4>
 
 </div>
 
 
-<!-- Start your brief intro here -->
-<div id="index-topics-zhengjia" class="section level3">
-<h3>Index Topics (Zhengjia)</h3>
-<!-- 
-This file can be automatically managed unless you don't want it. 
-Please do not edit anything between line "begin-of-index" and "end-of-index"
--->
-<!-- begin-of-index -->
-<div id="this-repository" class="section level4">
-<h4>1 This Repository</h4>
+<p>Configure <code>Python</code> (version 2 and 3), installing conda etc.</p>
 <ul>
-<li><a href="zw23-1_this_repository-1_how_to_contribute.html">1 How To Contribute</a></li>
+<li><a href="#install-miniconda-step-by-step">Install Miniconda Step-by-step</a></li>
+<li><a href="#create-python-virtual-environment">Create Python Virtual Environment</a></li>
+<li><a href="#configure-jupyter-notebook">Configure jupyter-notebook</a></li>
 </ul>
+<div id="install-miniconda-step-by-step" class="section level4">
+<h4>Install Miniconda Step-by-step</h4>
+<p>Personally I highly recommend that you install <code>conda</code> environment as it usually saves tons of time managing different packages and dependencies.</p>
+<ol style="list-style-type: decimal">
+<li>Open terminal, download <code>miniconda</code> to a temporary folder:</li>
+</ol>
+<pre><code>mkdir ~/junk
+cd ~/junk
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Install</li>
+</ol>
+<pre><code>sh Miniconda3-latest-Linux-x86_64.sh</code></pre>
+<ul>
+<li>hit <code>Enter</code> to read license agreement, you can press <code>shift+Q</code> and enter <code>yes</code> to agree</li>
+<li>hit <code>Enter</code> to install conda to default location, and wait…</li>
+<li>type <code>yes</code> to init conda</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Setup start-up code</li>
+</ol>
+<p>A quick way is:</p>
+<pre><code>echo &quot;source ~/.bashrc&quot; &gt; ~/.bash_profile</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Exit terminal and reconnect to the server. Now your prompt looks like <code>(base) -bash-4.2$ ...</code>. You can enter <code>conda list</code> to check whether conda is in your path.</li>
+</ol>
 </div>
-<div id="owlstats-server" class="section level4">
-<h4>2 Owlstats Server</h4>
-<ul>
-<li><a href="zw23-2_owlstats_server-1_get_started.html">1 Get Started</a></li>
-<li><a href="zw23-2_owlstats_server-2_configure_python.html">2 Configure Python</a></li>
-</ul>
-<!-- end-of-index -->
-<!-- Start your other stuff here -->
+<div id="create-python-virtual-environment" class="section level4">
+<h4>Create Python Virtual Environment</h4>
+<ol style="list-style-type: decimal">
+<li>Install conda, then enter</li>
+</ol>
+<pre><code>conda create -n py3 python=3</code></pre>
+<p>This will create a python3 environment called <code>py3</code>. If you have specific python version, please replace <code>python=3</code> with <code>python=3.x.x</code>.</p>
+<p>You could also create python 2 environemnt to run old scripts</p>
+<pre><code>conda create -n py2 python=2</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Activate environment</li>
+</ol>
+<p>For example, I want to activate <code>py3</code> just created,</p>
+<pre><code>conda activate py3</code></pre>
+<p>Your prompt line will become <code>(py3) -bash-4.2$</code>, this means you are in Python3 environment. You can check Python version using</p>
+<pre><code>python -V</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Install packages</li>
+</ol>
+<p>Please use <code>conda install</code> as much as possible. For example, if you want to install GPU version of tensorflow:</p>
+<pre><code>conda install -c anaconda tensorflow-gpu</code></pre>
+<p>Here are some useful packages:</p>
+<pre><code>conda install jupyter h5py pandas hdf5 numpy ipykernel tensorflow-gpu</code></pre>
+<p>This will allow you to have jupyter notebook IDE.</p>
+</div>
+<div id="configure-jupyter-notebook" class="section level4">
+<h4>Configure jupyter-notebook`</h4>
+<p>Finish the last two parts</p>
+<ol style="list-style-type: decimal">
+<li>Activate conda environment, generate config file</li>
+</ol>
+<pre><code>conda activate py3
+jupyter notebook --generate-config</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a password</li>
+</ol>
+<p>In terminal, enter <code>python</code> to enter python command line.</p>
+<p>Copy the following command</p>
+<pre><code>from notebook.auth import passwd; passwd()</code></pre>
+<p>Enter your password for jupyter notebook, repeat, and copy the somthing like <code>sha1:8ff338c59:f515cdc0b070eddae677238df5b3bcf9feefd</code> to your text editor.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Edit <code>~/.jupyter/jupyter_notebook_config.py</code>.</li>
+</ol>
+<p>If you don’t know how to do that in command line, edit it in RStudio</p>
+<p>Find and change/uncommend these lines:</p>
+<pre><code>c.NotebookApp.allow_root = False
+
+c.NotebookApp.open_browser = False
+
+c.NotebookApp.notebook_dir = &#39;&#39;
+
+# Enter your own hash code got from step 2 !!!
+c.NotebookApp.password = &#39;sha1:bcd259ccf...&lt;your hashed password here&gt;&#39;
+
+c.NotebookApp.ip = &#39;*&#39;
+c.NotebookApp.password_required = True</code></pre>
+<p>Save the file</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Test <code>jupyter-notebook</code></li>
+</ol>
+<p>In terminal</p>
+<pre><code>jupyter notebook</code></pre>
+<p>The console will give you</p>
+<pre><code>[I 05:05:54.176 NotebookApp] Serving notebooks from local directory: ***
+[I 05:05:54.176 NotebookApp] The Jupyter Notebook is running at:
+[I 05:05:54.176 NotebookApp] http://[server name]:8888/</code></pre>
+<p>Copy the url above (starts with <code>http://</code>), copy into your browser.</p>
+<p>Enter the password created from step 2.</p>
+<div class="col-sm-6">
+<a class="thumbnail" title="Jupyter Notebook Login Screen" href="#">
+<img src="shared/assets/images/jupyter-login.png"/>
+<div class="caption">Jupyter Notebook Login Screen</div>
+</a>
 </div>
 </div>
 

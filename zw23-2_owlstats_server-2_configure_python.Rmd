@@ -1,0 +1,163 @@
+---
+title: "Use Python on the Server"
+author: "Zhengjia Wang"
+date: "10/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Configure `Python` (version 2 and 3), installing conda etc.
+
+* [Install Miniconda Step-by-step](#install-miniconda-step-by-step)
+* [Create Python Virtual Environment](#create-python-virtual-environment)
+* [Configure jupyter-notebook](#configure-jupyter-notebook)
+
+#### Install Miniconda Step-by-step
+
+Personally I highly recommend that you install `conda` environment as it usually saves tons of time managing different packages and dependencies. 
+
+1. Open terminal, download `miniconda` to a temporary folder:
+```
+mkdir ~/junk
+cd ~/junk
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+2. Install 
+```
+sh Miniconda3-latest-Linux-x86_64.sh
+```
+  * hit `Enter` to read license agreement, you can press `shift+Q` and enter `yes` to agree
+  * hit `Enter` to install conda to default location, and wait...
+  * type `yes` to init conda
+
+3. Setup start-up code
+
+A quick way is:
+
+```
+echo "source ~/.bashrc" > ~/.bash_profile
+```
+
+4. Exit terminal and reconnect to the server. Now your prompt looks like `(base) -bash-4.2$ ...`. You can enter `conda list` to check whether conda is in your path.
+
+
+#### Create Python Virtual Environment
+
+1. Install conda, then enter
+```
+conda create -n py3 python=3
+```
+
+This will create a python3 environment called `py3`. If you have specific python version, please replace `python=3` with `python=3.x.x`.
+
+You could also create python 2 environemnt to run old scripts
+
+```
+conda create -n py2 python=2
+```
+
+2. Activate environment
+
+For example, I want to activate `py3` just created,
+```
+conda activate py3
+```
+
+Your prompt line will become `(py3) -bash-4.2$ `, this means you are in Python3 environment. You can check Python version using 
+```
+python -V
+```
+
+3. Install packages
+
+Please use `conda install` as much as possible. For example, if you want to install GPU version of tensorflow:
+
+```
+conda install -c anaconda tensorflow-gpu
+```
+
+Here are some useful packages:
+
+```
+conda install jupyter h5py pandas hdf5 numpy ipykernel tensorflow-gpu
+```
+
+This will allow you to have jupyter notebook IDE.
+
+#### Configure jupyter-notebook`
+
+Finish the last two parts
+
+1. Activate conda environment, generate config file
+```
+conda activate py3
+jupyter notebook --generate-config
+```
+
+2. Create a password
+
+In terminal, enter `python` to enter python command line.
+
+Copy the following command
+
+```
+from notebook.auth import passwd; passwd()
+```
+
+Enter your password for jupyter notebook, repeat, and copy the somthing like `sha1:8ff338c59:f515cdc0b070eddae677238df5b3bcf9feefd` to your text editor.
+
+
+3. Edit `~/.jupyter/jupyter_notebook_config.py`. 
+
+If you don't know how to do that in command line, edit it in RStudio
+```{r, eval = FALSE}
+rstudioapi::navigateToFile('~/.jupyter/jupyter_notebook_config.py')
+```
+
+Find and change/uncommend these lines:
+
+```
+c.NotebookApp.allow_root = False
+
+c.NotebookApp.open_browser = False
+
+c.NotebookApp.notebook_dir = ''
+
+# Enter your own hash code got from step 2 !!!
+c.NotebookApp.password = 'sha1:bcd259ccf...<your hashed password here>'
+
+c.NotebookApp.ip = '*'
+c.NotebookApp.password_required = True
+```
+
+Save the file
+
+4. Test `jupyter-notebook`
+
+In terminal
+
+```
+jupyter notebook
+```
+
+The console will give you
+
+```
+[I 05:05:54.176 NotebookApp] Serving notebooks from local directory: ***
+[I 05:05:54.176 NotebookApp] The Jupyter Notebook is running at:
+[I 05:05:54.176 NotebookApp] http://[server name]:8888/
+```
+
+Copy the url above (starts with `http://`), copy into your browser.
+
+Enter the password created from step 2.
+
+```{r}
+source('shared/html-utils.R')
+thumbnail('Jupyter Notebook Login Screen', img = 'shared/assets/images/jupyter-login.png')
+```
+
