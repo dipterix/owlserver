@@ -1,0 +1,9 @@
+name: "Owl-Server"
+output_dir: "docs"
+navbar:
+  title: "Owl-Server"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "How to Contribute"
+      href: how-to-contribute-to-the-repository.html

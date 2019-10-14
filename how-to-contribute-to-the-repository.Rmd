@@ -1,0 +1,25 @@
+---
+title: "How to Contribute to the Repository"
+---
+
+Objectives:
+
+A guide to add stuff to this repository
+
+Table of contents:
+
+* [Prerequisites](#pre-requisite)
+* [Get started](#get-started)
+
+
+### Pre-requisite
+
+This website is built using `rmarkdown`. Please check the [guide](https://www.markdownguide.org/getting-started) if you don't know how to edit `markdown` files. To add/edit pages, you need `git` to get access to Github and `rmarkdown` installed. Luckily, these can all be found in `RStudio`. 
+
+### Get Started
+
+1. Open RStudio, create project via `File` > `New Project` > `Version Control`
+```
+File - New Project - Version Control
+```
+

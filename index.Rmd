@@ -1,0 +1,9 @@
+---
+title: "Home"
+---
+
+Hello, this is a repository set up for `stats-owl-server`. Please contribute to github repository at [here](https://github.com/dipterix/). 
+
+The objectives is to provide shared sample code, shell scripts, configurations, and other Q&As about the server.
+
+
