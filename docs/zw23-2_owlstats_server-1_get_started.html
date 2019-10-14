@@ -10,9 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Zhengjia Wang" />
 
+<meta name="date" content="2019-10-14" />
 
-<title>Zhengjia</title>
+<title>1. Get Started</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -292,45 +294,63 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Zhengjia</h1>
+<h1 class="title toc-ignore">1. Get Started</h1>
+<h4 class="author">Zhengjia Wang</h4>
+<h4 class="date">10/14/2019</h4>
 
 </div>
 
 
-<!-- Start your brief intro here -->
-<p>This is your member site. Please leave all anchors like <code>&lt;!--</code>, <code>--&gt;</code> <strong>as is</strong> in this document. They are used to automatically manage the topics.</p>
-<ol style="list-style-type: decimal">
-<li>To create a valid topic, please create <code>md</code> or <code>rmd</code> files in project directory using the following syntax:</li>
-</ol>
-<pre><code>zw23-my_topic_name-article_title.md
-zw23-my_topic_name-article_title.rmd</code></pre>
-<p>For example, a file named <code>bob-2_clustering_method-1_introduction</code> will gain a topic <code>2 Clustering Method</code> with title <code>1 Introduction</code> here.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p>To compile your work, simply go to RStudio tabpanel <code>Build</code> &gt; press <code>Build Website</code>.</p></li>
-<li><p>To automatically manage your topics and add them to this file, run the following commands</p></li>
-</ol>
-<pre><code>source(&#39;shared/template-utils.R&#39;)
-collect_user_topics(&quot;zw23&quot;)</code></pre>
-<div id="index-topics-zhengjia" class="section level3">
-<h3>Index Topics (Zhengjia)</h3>
-<!-- 
-This file can be automatically managed unless you don't want it. 
-Please do not edit anything between line "begin-of-index" and "end-of-index"
--->
-<!-- begin-of-index -->
-<div id="this-repository" class="section level4">
-<h4>1 This Repository</h4>
+<p>This topic is all about how to use the server, such as simple bash commands to make your like easier. To avoid the server from being attacked, I use “[server_name]” to represent our actual server address, and “[netID]” to represent your net ID.</p>
+<p>List of Contents:</p>
 <ul>
-<li><a href="zw23-1_this_repository-1_how_to_contribute.html">1 How To Contribute</a></li>
+<li><a href="#login">login</a></li>
+<li><a href="#load-modules">load modules</a></li>
 </ul>
+<div id="login" class="section level4">
+<h4>Login</h4>
+<p>Two ways of logon to the server</p>
+<div id="ssh" class="section level6">
+<h6>1. ssh</h6>
+<p>On windows, you probably need ssh tools such as <code>putty</code> to configure. Please Google its usage. <!-- TODO: Add Windows instructions or at least a link --> On osx or linux, open <code>terminal</code>, type and enter:</p>
+<pre><code>## ssh [netID]@[server_name]</code></pre>
+<p>Enter your netID password.</p>
 </div>
-<div id="owlstats-server" class="section level4">
-<h4>2 Owlstats Server</h4>
+<div id="rstudio-server" class="section level6">
+<h6>2. RStudio Server</h6>
+<p>Open web browser, go to</p>
+<pre><code>## http://[server_name]:8787</code></pre>
+<p>Enter your netID and password.</p>
+</div>
+</div>
+<div id="load-modules" class="section level4">
+<h4>Load Modules</h4>
+<p>Once you successfully logged into the server, you can now use commands to control the server. Usually you won’t have <code>sudo</code> (admin) privilege therefore if you need some system packages, you cannot use commands like <code>sudo apt-get install</code> or <code>sudo yum install</code> to install packages.</p>
+<p>The command to save your like might be</p>
+<pre><code>module load XXX</code></pre>
+<p>For example, I need <code>fftw</code> package to apply fourier transformations (R package fftw relies on that package), I can use <code>module load fftw</code> to load it.</p>
+<p>You can use this to check available modules.</p>
+<pre><code>module avail </code></pre>
+<div id="change-visibility-of-your-files" class="section level6">
+<h6>3. Change visibility of your files</h6>
+<p><code>@Zijian</code> brought up a question when he was trying to play with the server, we can view some of other’s home folder. If you want some private folders and don’t want other to see the contents, Please use <code>chmod</code> command.</p>
+<p>For example, I have folder <code>~/private/</code> and I want to lock access from other accounts,</p>
+<pre><code>cd ~/private
+chmod 700 .</code></pre>
+<p>To check the privilege, use terminal command <code>ls -al</code></p>
+<p>The three-digit number <code>700</code> stands for:</p>
+<blockquote>
+<p>Only I can read/write/execute, others can not do anything.</p>
+</blockquote>
+<p>The detailed explanation is <a href="https://en.wikipedia.org/wiki/Chmod">here</a>. Some commonly used codes:</p>
 <ul>
-<li><a href="zw23-2_owlstats_server-1_get_started.html">1 Get Started</a></li>
+<li>700 I (owner) can do anything, other are blocked.</li>
+<li>765 I do anything, you can read/write, but not execute, other people can only read.</li>
+<li>755 I can do anything, other can read/execute scripts, but not write.</li>
+<li>744 You can read and use my stuff, but not write/execute</li>
+<li>777 expose myself to the whole world (feels great)</li>
 </ul>
-<!-- end-of-index -->
-<!-- Start your other stuff here -->
+<p><strong>WARNING</strong> Please <em>only</em> apply this to your own files. Please do not lock system files or those belongs to others.</p>
 </div>
 </div>
 

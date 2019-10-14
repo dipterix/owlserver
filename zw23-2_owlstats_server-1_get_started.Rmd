@@ -1,0 +1,87 @@
+---
+title: "1. Get Started"
+author: "Zhengjia Wang"
+date: "10/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, prompt = '')
+```
+
+```{r}
+server_name = '[server_name]'
+net_id = '[netID]'
+```
+
+This topic is all about how to use the server, such as simple bash commands to make your like easier. To avoid the server from being attacked, I use "`r server_name`" to represent our actual server address, and "`r net_id`" to represent your net ID.
+
+List of Contents:
+
+* [login](#login)
+* [load modules](#load-modules)
+
+#### Login
+
+Two ways of logon to the server
+
+###### 1. ssh
+
+On windows, you probably need ssh tools such as `putty` to configure. Please Google its usage. <!-- TODO: Add Windows instructions or at least a link --> On osx or linux, open `terminal`, type and enter:
+```{r, prompt = '$'}
+cat(sprintf('ssh %s@%s', net_id, server_name))
+```
+
+Enter your netID password.
+
+###### 2. RStudio Server
+
+Open web browser, go to
+```{r}
+cat(sprintf('http://%s:8787', server_name))
+```
+
+Enter your netID and password.
+
+#### Load Modules
+
+Once you successfully logged into the server, you can now use commands to control the server. Usually you won't have `sudo` (admin) privilege therefore if you need some system packages, you cannot use commands like `sudo apt-get install` or `sudo yum install` to install packages.
+
+The command to save your like might be
+```
+module load XXX
+```
+
+For example, I need `fftw` package to apply fourier transformations (R package fftw relies on that package), I can use `module load fftw` to load it. 
+
+You can use this to check available modules.
+```
+module avail 
+```
+
+
+###### 3. Change visibility of your files
+
+`@Zijian` brought up a question when he was trying to play with the server, we can view some of other's home folder. If you want some private folders and don't want other to see the contents, Please use `chmod` command.
+
+For example, I have folder `~/private/` and I want to lock access from other accounts, 
+```
+cd ~/private
+chmod 700 .
+```
+
+To check the privilege, use terminal command `ls -al`
+
+The three-digit number `700` stands for: 
+
+> Only I can read/write/execute, others can not do anything.
+
+The detailed explanation is [here](https://en.wikipedia.org/wiki/Chmod). Some commonly used codes:
+
+* 700 I (owner) can do anything, other are blocked.
+* 765 I do anything, you can read/write, but not execute, other people can only read.
+* 755 I can do anything, other can read/execute scripts, but not write.
+* 744 You can read and use my stuff, but not write/execute
+* 777 expose myself to the whole world (feels great)
+
+**WARNING** Please *only* apply this to your own files. Please do not lock system files or those belongs to others. 
