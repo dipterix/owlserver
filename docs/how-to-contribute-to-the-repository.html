@@ -307,10 +307,27 @@ $(document).ready(function () {
 </div>
 <div id="get-started" class="section level3">
 <h3>Get Started</h3>
+<p><em>This part is one-time setup</em></p>
 <ol style="list-style-type: decimal">
-<li>Open RStudio, create project via <code>File</code> &gt; <code>New Project</code> &gt; <code>Version Control</code></li>
+<li>Open RStudio, create project via <code>File</code> &gt; <code>New Project</code> &gt; <code>Version Control</code> &gt; <code>Git</code>. Copy-paste <code>https://github.com/dipterix/owlserver</code> into <code>Repository URL</code> and choose a proper directory.
+<div style="width:45%">
+<img src="zhengjia/assets/images/import-repo.png" title="fig:" alt="Clone Git Repository" />
+</div></li>
+<li>Switch to <code>Terminal</code> tab in Rstudio, enter your Github user credentials like this:</li>
 </ol>
-<pre><code>File - New Project - Version Control</code></pre>
+<pre><code>$ git config --global user.name &quot;Bob&quot;
+$ git config --global user.email &quot;bob@example.com&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Create your own folder in the project folder. In my case, it’s called <code>zhengjia</code>. You can put all the static stuff here, like sample code, bash scripts or images that are ready to share.</li>
+</ol>
+</div>
+<div id="create-your-pages" class="section level3">
+<h3>Create Your Pages</h3>
+<ol style="list-style-type: decimal">
+<li>Create <code>.rmd</code> or <code>.md</code> file under <strong>project</strong> directory, for example, <code>example.rmd</code>. Any markdown files inside of sub-folders will not be compiled.</li>
+<li>Edit the file just created, you can check <a href="">a simple cheatsheet</a> and <a href="">source code</a> as a reference</li>
+<li>Add your</li>
+</ol>
 </div>
 
 
