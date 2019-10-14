@@ -5,5 +5,7 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Contributors"
+      href: contributors.html
     - text: "How to Contribute"
-      href: how-to-contribute-to-the-repository.html
+      href: zw23-1_this_repository-1_how_to_contribute.html

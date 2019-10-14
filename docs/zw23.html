@@ -12,7 +12,7 @@
 
 
 
-<title>Home</title>
+<title>Zhengjia</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -292,13 +292,41 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Zhengjia</h1>
 
 </div>
 
 
-<p>Hello, this is a repository set up for <code>stats-owl-server</code>. Please contribute to github repository at <a href="https://github.com/dipterix/owlserver/">here</a>.</p>
-<p>The objectives is to provide shared sample code, shell scripts, configurations, and other Q&amp;As about the server.</p>
+<!-- Start your brief intro here -->
+<p>This is your member site. Please leave all anchors like <code>&lt;!--</code>, <code>--&gt;</code> <strong>as is</strong> in this document. They are used to automatically manage the topics.</p>
+<ol style="list-style-type: decimal">
+<li>To create a valid topic, please create <code>md</code> or <code>rmd</code> files in project directory using the following syntax:</li>
+</ol>
+<pre><code>zw23-my_topic_name-article_title.md
+zw23-my_topic_name-article_title.rmd</code></pre>
+<p>For example, a file named <code>bob-2_clustering_method-1_introduction</code> will gain a topic <code>2 Clustering Method</code> with title <code>1 Introduction</code> here.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>To compile your work, simply go to RStudio tabpanel <code>Build</code> &gt; press <code>Build Website</code>.</p></li>
+<li><p>To automatically manage your topics and add them to this file, run the following commands</p></li>
+</ol>
+<pre><code>source(&#39;shared/template-utils.R&#39;)
+collect_user_topics(&quot;zw23&quot;)</code></pre>
+<div id="index-topics-zhengjia" class="section level3">
+<h3>Index Topics (Zhengjia)</h3>
+<!-- 
+This file can be automatically managed unless you don't want it. 
+Please do not edit anything between line "begin-of-index" and "end-of-index"
+-->
+<!-- begin-of-index -->
+<div id="this-repository" class="section level4">
+<h4>1 This Repository</h4>
+<ul>
+<li><a href="zw23-1_this_repository-1_how_to_contribute.html">1 How To Contribute</a></li>
+</ul>
+<!-- end-of-index -->
+<!-- Start your other stuff here -->
+</div>
+</div>
 
 
 

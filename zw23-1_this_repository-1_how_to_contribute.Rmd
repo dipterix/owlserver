@@ -1,0 +1,100 @@
+---
+title: "How to Contribute to the Repository"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+source('./shared/html-utils.R')
+git_user = 'dipterix'
+```
+
+Objectives:
+
+A guide to add stuff to this repository
+
+Table of contents:
+
+* [Prerequisites](#pre-requisite)
+* [Get started](#get-started)
+
+
+### Pre-requisite
+
+This website is built using `rmarkdown`. Please check the [guide](https://www.markdownguide.org/getting-started) if you don't know how to edit `markdown` files. To add/edit pages, you need `git` to get access to Github and `rmarkdown` installed. Luckily, these can all be found in `RStudio`. 
+
+### Get Started
+
+*This part is one-time setup*
+
+1. Open RStudio, create project via `File` > `New Project` > `Version Control` > `Git`. Copy-paste `r sprintf("https://github.com/%s/owlserver", git_user)` into `Repository URL` and choose a proper directory.
+```{r, echo=FALSE}
+column(
+  width = 9, offset = 3,
+  thumbnail(title = 'Clone Git Repository', 
+            img = 'shared/assets/images/import-repo.png', 
+            caption = TRUE, width = 8)
+)
+```
+2. Switch to `Terminal` tab in Rstudio, enter your Github user credentials like this:
+```
+$ git config --global user.name "Bob"
+$ git config --global user.email "bob@example.com"
+```
+3. Run the following script to create your user. In my case, I created user `zw23`. Please change `user_name` to your name.
+```
+user_name = 'zw23'   # Change to your name here!!!
+
+source('shared/template-utils.R')
+add_user(user_name)
+```
+4. (Optional) In the opened `contributors.md`. Find the line just created, in my case, `* [Zw23](zw23.html)`, edit it so that others know who you are. (I changed mine to `* [Zhengjia](zw23.html)`)
+
+### Create Your Pages
+
+1. Create `.rmd` or `.md` file directly under **project** directory, the naming follows this convention:
+```
+user_name-article_topic-article_title.md
+user_name-article_topic-article_title.rmd
+```
+Please use letters, digits and `_` for your username, article topics and title. Use `-` to link them.
+2. (Optional) Run the following command to add your article into your personal site
+```
+source('shared/template-utils.R')
+collect_user_topics(YOUR_USER_NAME)
+```
+3. Edit the file just created. If you want markdown references, check [a simple cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) or the [source code of this page](https://github.com/dipterix/owlserver/blob/master/how-to-contribute-to-the-repository.Rmd)
+4. Compile the site. There are two ways:
+  a. run `rmarkdown::render_site()` in R
+  b. *or*, Go to `Build` tab > `Build Website`
+5. Pull, commit, and push to github: 
+  * Go to `Git` tab in RStudio, select all files you want to save to Github, 
+  * click `Commit`, add commit messages (description of what you did), 
+  * press `commit`. If all goes well, you will see the following
+  * Don't forget to press `Push`. This step actually send your local files to Github.
+```{r, echo=FALSE}
+column(
+  12,
+  thumbnail(title = 'Commit to stage your changes', 
+            img = 'shared/assets/images/git-commit.png', 
+            caption = TRUE, width = 6),
+  thumbnail(title = 'Push to sync with Github repository', 
+            img = 'shared/assets/images/git-push.png', 
+            caption = TRUE, width = 6)
+)
+```
+4. Preview your page, should be located at 
+```{r} 
+cat(sprintf("https://%s.github.io/owlserver/YOUR_FILE_NAME.html", git_user))
+```
+
+##### Notes
+
+* If you want your markdown files to be compiled, don't create your markdown files under sub-folders, put them directly under project folder.
+* Always `pull` > `commit` > `push` to avoid sync conflicts.
+* Only allow letters, digits and `-`, `_` in your mardown file names, don't start with `_` nor `-`, otherwise the file will be marked **will not compile**.
+
+
+

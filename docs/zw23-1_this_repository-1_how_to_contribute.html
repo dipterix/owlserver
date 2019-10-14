@@ -275,7 +275,10 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="how-to-contribute-to-the-repository.html">How to Contribute</a>
+  <a href="contributors.html">Contributors</a>
+</li>
+<li>
+  <a href="zw23-1_this_repository-1_how_to_contribute.html">How to Contribute</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -309,25 +312,81 @@ $(document).ready(function () {
 <h3>Get Started</h3>
 <p><em>This part is one-time setup</em></p>
 <ol style="list-style-type: decimal">
-<li>Open RStudio, create project via <code>File</code> &gt; <code>New Project</code> &gt; <code>Version Control</code> &gt; <code>Git</code>. Copy-paste <code>https://github.com/dipterix/owlserver</code> into <code>Repository URL</code> and choose a proper directory.
-<div style="width:45%">
-<img src="zhengjia/assets/images/import-repo.png" title="fig:" alt="Clone Git Repository" />
+<li>Open RStudio, create project via <code>File</code> &gt; <code>New Project</code> &gt; <code>Version Control</code> &gt; <code>Git</code>. Copy-paste <a href="https://github.com/dipterix/owlserver" class="uri">https://github.com/dipterix/owlserver</a> into <code>Repository URL</code> and choose a proper directory. <div class="col-sm-9 col-sm-offset-3">
+<div class="col-sm-8">
+<a class="thumbnail" title="Clone Git Repository" href="#">
+<img src="shared/assets/images/import-repo.png"/>
+<div class="caption">Clone Git Repository</div>
+</a>
+</div>
 </div></li>
 <li>Switch to <code>Terminal</code> tab in Rstudio, enter your Github user credentials like this:</li>
 </ol>
 <pre><code>$ git config --global user.name &quot;Bob&quot;
 $ git config --global user.email &quot;bob@example.com&quot;</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Create your own folder in the project folder. In my case, it’s called <code>zhengjia</code>. You can put all the static stuff here, like sample code, bash scripts or images that are ready to share.</li>
+<li>Run the following script to create your user. In my case, I created user <code>zw23</code>. Please change <code>user_name</code> to your name.</li>
+</ol>
+<pre><code>user_name = &#39;zw23&#39;   # Change to your name here!!!
+
+source(&#39;shared/template-utils.R&#39;)
+add_user(user_name)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>(Optional) In the opened <code>contributors.md</code>. Find the line just created, in my case, <code>* [Zw23](zw23.html)</code>, edit it so that others know who you are. (I changed mine to <code>* [Zhengjia](zw23.html)</code>)</li>
 </ol>
 </div>
 <div id="create-your-pages" class="section level3">
 <h3>Create Your Pages</h3>
 <ol style="list-style-type: decimal">
-<li>Create <code>.rmd</code> or <code>.md</code> file under <strong>project</strong> directory, for example, <code>example.rmd</code>. Any markdown files inside of sub-folders will not be compiled.</li>
-<li>Edit the file just created, you can check <a href="">a simple cheatsheet</a> and <a href="">source code</a> as a reference</li>
-<li>Add your</li>
+<li>Create <code>.rmd</code> or <code>.md</code> file directly under <strong>project</strong> directory, the naming follows this convention:</li>
 </ol>
+<pre><code>user_name-article_topic-article_title.md
+user_name-article_topic-article_title.rmd</code></pre>
+<p>Please use letters, digits and <code>_</code> for your username, article topics and title. Use <code>-</code> to link them. 2. (Optional) Run the following command to add your article into your personal site</p>
+<pre><code>source(&#39;shared/template-utils.R&#39;)
+collect_user_topics(YOUR_USER_NAME)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Edit the file just created. If you want markdown references, check <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">a simple cheatsheet</a> or the <a href="https://github.com/dipterix/owlserver/blob/master/how-to-contribute-to-the-repository.Rmd">source code of this page</a></li>
+<li>Compile the site. There are two ways:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>run <code>rmarkdown::render_site()</code> in R</li>
+<li><em>or</em>, Go to <code>Build</code> tab &gt; <code>Build Website</code></li>
+</ol>
+<ol start="5" style="list-style-type: decimal">
+<li>Pull, commit, and push to github:</li>
+</ol>
+<ul>
+<li>Go to <code>Git</code> tab in RStudio, select all files you want to save to Github,</li>
+<li>click <code>Commit</code>, add commit messages (description of what you did),</li>
+<li>press <code>commit</code>. If all goes well, you will see the following</li>
+<li>Don’t forget to press <code>Push</code>. This step actually send your local files to Github. <div class="col-sm-12">
+<div class="col-sm-6">
+<a class="thumbnail" title="Commit to stage your changes" href="#">
+<img src="shared/assets/images/git-commit.png"/>
+<div class="caption">Commit to stage your changes</div>
+</a>
+</div>
+<div class="col-sm-6">
+<a class="thumbnail" title="Push to sync with Github repository" href="#">
+<img src="shared/assets/images/git-push.png"/>
+<div class="caption">Push to sync with Github repository</div>
+</a>
+</div>
+</div></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Preview your page, should be located at</li>
+</ol>
+<pre><code>## https://dipterix.github.io/owlserver/YOUR_FILE_NAME.html</code></pre>
+<div id="notes" class="section level5">
+<h5>Notes</h5>
+<ul>
+<li>If you want your markdown files to be compiled, don’t create your markdown files under sub-folders, put them directly under project folder.</li>
+<li>Always <code>pull</code> &gt; <code>commit</code> &gt; <code>push</code> to avoid sync conflicts.</li>
+<li>Only allow letters, digits and <code>-</code>, <code>_</code> in your mardown file names, don’t start with <code>_</code> nor <code>-</code>, otherwise the file will be marked <strong>will not compile</strong>.</li>
+</ul>
+</div>
 </div>
 
 
